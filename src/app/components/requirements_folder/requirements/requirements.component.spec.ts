@@ -7,6 +7,7 @@ import { RequirementService } from '../../../services/requirement.service';
 import { Requirement } from '../../../classes/requirement';
 import { MatIconModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('RequirementsComponent', () => {
   let component: RequirementsComponent;
@@ -25,7 +26,8 @@ describe('RequirementsComponent', () => {
       dueDate : "2019-03-05T03:20:24.015",
       comments : [],
       assignedToUser : 'User 2',
-      archived : true
+      archived : true,
+      projectId: 1
     },
     {
       id: 2,
@@ -39,7 +41,8 @@ describe('RequirementsComponent', () => {
       dueDate : "2019-03-05T03:20:24.015",
       comments : [],
       assignedToUser : 'User 2',
-      archived : true
+      archived : true,
+      projectId : 1
     },
 ];
 
@@ -61,7 +64,8 @@ let dummyUsers = [
       imports: [
         RouterTestingModule,
         MatDialogModule,
-        MatIconModule
+        MatIconModule,
+        HttpClientTestingModule
       ],
       declarations: [ RequirementsComponent ],
       providers: [RequirementsComponent, {

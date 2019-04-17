@@ -6,4 +6,5 @@ export class IssueRequest {
     status: string;
     createdByUserId: number;
     assignedUserId: number;
+    projectId: number;
 }

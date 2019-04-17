@@ -5,6 +5,8 @@ import { IssueRequest } from '../classes/issue-request';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { Issue } from '../classes/issue';
+import { ProjectService } from './project.service';
+import { Project } from '../classes/project';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +15,19 @@ export class IssueService {
 
   private issueUrl: string = environment.url + "/issues"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private projectService: ProjectService) { }
 
   getIssues(): Observable<Array<Issue>> {
     let headers: HttpHeaders = this.getHeaders();
 
-    return this.http.get<Array<Issue>>(this.issueUrl, {headers: headers, withCredentials:true});
+    
+    let project = this.projectService.getActiveProject();
+    let url = this.issueUrl;
+    if (project) {
+      url = url + "?project=" + project.projectId 
+    }
+
+    return this.http.get<Array<Issue>>(url, {headers: headers, withCredentials:true});
   }
 
   getIssueById(issueId: number): Observable<Issue> {
@@ -30,6 +39,9 @@ export class IssueService {
 
   createIssue(issue: IssueRequest): Observable<Object> {
     let headers: HttpHeaders = this.getHeaders();
+
+    let project = this.projectService.getActiveProject();
+    issue.projectId = project.projectId;
 
     return this.http.post(this.issueUrl, JSON.stringify(issue), {headers: headers, withCredentials:true});
   }

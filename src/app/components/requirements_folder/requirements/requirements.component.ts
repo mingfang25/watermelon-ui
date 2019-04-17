@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { RequirementFormComponent } from '../requirement-form/requirement-form.component';
 import { EditRequirementFormComponent } from '../edit-requirement-form/edit-requirement-form.component';
 import { of, BehaviorSubject } from 'rxjs';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-requirements',
@@ -16,7 +17,8 @@ import { of, BehaviorSubject } from 'rxjs';
 
 export class RequirementsComponent implements OnInit {
 
-  constructor(private router : Router, private requirementService: RequirementService, public dialog: MatDialog, private activatedRoute: ActivatedRoute) {
+  constructor(private router : Router, private requirementService: RequirementService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, 
+    private projectService: ProjectService) {
 
 
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -79,6 +81,9 @@ export class RequirementsComponent implements OnInit {
         this.openDetailDialog(this.activatedRoute.snapshot.params['id']);
       }
     })
+
+    // subscibe to project changed updates from the project service when a user switches the active projects and reload
+    this.projectService.projectChanged$.subscribe(result => this.getRequirements());
   }
 
   openDetailDialog(id): void {

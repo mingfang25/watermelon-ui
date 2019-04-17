@@ -18,6 +18,12 @@
               <mat-error *ngIf="registrationForm.controls.lastname.invalid && registrationForm.controls.lastname.errors.maxlength">last name too long</mat-error>
           </mat-form-field>
           <mat-form-field class="registration-container__registration-input">
+            <input matInput placeholder="Email Address" formControlName="email" required>
+            <mat-error *ngIf="registrationForm.controls.email.invalid && registrationForm.controls.email.errors.required">email address is required</mat-error>
+            <mat-error *ngIf="registrationForm.controls.email.invalid && registrationForm.controls.email.errors.maxlength">email address is too long</mat-error>
+            <mat-error *ngIf="registrationForm.controls.email.invalid && registrationForm.controls.email.errors.email">email address format is invalid</mat-error>
+        </mat-form-field>
+          <mat-form-field class="registration-container__registration-input">
               <input matInput type="password" placeholder="Password" formControlName="password" required>
               <mat-error *ngIf="registrationForm.controls.password.invalid && registrationForm.controls.password.errors.required">password is required</mat-error>
               <mat-error *ngIf="registrationForm.controls.password.invalid && registrationForm.controls.password.errors.maxlength">password too long</mat-error>

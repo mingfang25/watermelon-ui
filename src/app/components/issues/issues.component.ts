@@ -8,6 +8,7 @@ import { IssueRequest } from 'src/app/classes/issue-request';
 import { IssueDialogComponent } from './issue-dialog/issue-dialog.component';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { ProjectService } from 'src/app/services/project.service';
 
 
 export interface Status {
@@ -37,7 +38,7 @@ export class IssuesComponent implements OnInit {
 	public title: string;
 	public count: number;
 
-	constructor(private issueService: IssueService, private userService: UserService, public dialog: MatDialog, private activatedRoute: ActivatedRoute) { }
+	constructor(private issueService: IssueService, private userService: UserService, public dialog: MatDialog, private activatedRoute: ActivatedRoute, private projectService: ProjectService) { }
 
 	ngOnInit() {
 		this.getIssues();
@@ -46,6 +47,8 @@ export class IssuesComponent implements OnInit {
 		if (this.activatedRoute.snapshot.params['issueId']) {
 			this.getOneIssueForNavigation(this.activatedRoute.snapshot.params['issueId']);
 		}
+
+		this.projectService.projectChanged$.subscribe(result => this.getIssues());
 	}
 
 	filteredIssues() {

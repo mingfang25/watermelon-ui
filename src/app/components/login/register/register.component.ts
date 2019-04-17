@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
     'username': new FormControl('', [Validators.required, Validators.maxLength(20)]),
     'firstname': new FormControl('', [Validators.required, Validators.maxLength(50)]),
     'lastname': new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    'email': new FormControl('', [Validators.required, Validators.email, Validators.maxLength(50)]),
     'password': new FormControl('', [Validators.required, Validators.maxLength(20)]),
     'verifypassword': new FormControl('', [Validators.required]),
   }, {
@@ -45,6 +46,7 @@ export class RegisterComponent implements OnInit {
     register.userName = this.registrationForm.get("username").value;
     register.firstName = this.registrationForm.get("firstname").value;
     register.lastName = this.registrationForm.get("lastname").value;
+    register.email = this.registrationForm.get("email").value;
     register.password = this.registrationForm.get("password").value;
 
     this.userService.registerUser(register)

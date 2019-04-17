@@ -11,6 +11,7 @@ export class Requirement {
     comments : [];
     assignedToUser : any;
     archived : boolean;
+    projectId: number;
     //url : string;
 
     constructor() {

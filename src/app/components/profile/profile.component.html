@@ -1,7 +1,10 @@
 <div class="profile-container">
   <mat-card>
-      <mat-card-title color="primary">{{user.userName}}'s Profile</mat-card-title>
-      <form [formGroup]="profileNameForm" #formDir="ngForm" (ngSubmit)="updateName()">
+      <div class="profile-container__header">
+        <a href="https://www.gravatar.com"><img src="{{user.avatarUrl}}" alt="user picture" class="profile-container__header--user-icon" matTooltip="Edit on Gravatar"></a>
+        <mat-card-title color="primary">{{user.userName}}'s Profile</mat-card-title>
+      </div>
+      <form [formGroup]="profileNameForm" #formDir="ngForm" (ngSubmit)="updateName()" class="profile-container__form--one">
           <mat-form-field class="profile-container__profile-input">
               <input matInput placeholder="First Name" formControlName="firstname" required>
               <mat-error *ngIf="profileNameForm.controls.firstname.invalid && profileNameForm.controls.firstname.errors.required">first name is required</mat-error>
@@ -14,6 +17,17 @@
           </mat-form-field>
           <div class="profile-container__profile-button">
             <button mat-raised-button color="primary">Update Name</button>
+        </div>
+      </form>
+      <form [formGroup]="profileEmailForm" #formDir="ngForm" (ngSubmit)="updateEmail()">
+        <mat-form-field class="profile-container__profile-input">
+            <input matInput placeholder="Email Address" formControlName="email" required>
+            <mat-error *ngIf="profileEmailForm.controls.email.invalid && profileEmailForm.controls.email.errors.required">email address is required</mat-error>
+            <mat-error *ngIf="profileEmailForm.controls.email.invalid && profileEmailForm.controls.email.errors.maxlength">email address is too long</mat-error>
+            <mat-error *ngIf="profileEmailForm.controls.email.invalid && profileEmailForm.controls.email.errors.email">email address format is invalid</mat-error>
+        </mat-form-field>
+        <div class="profile-container__profile-button">
+          <button mat-raised-button color="primary">Update Email</button>
         </div>
       </form>
       <form [formGroup]="profilePasswordForm" #formDir="ngForm" (ngSubmit)="updatePassword()">

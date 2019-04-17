@@ -15,21 +15,25 @@ import { User } from 'src/app/classes/user';
 })
 export class ProfileComponent implements OnInit {
 
-  profileNameForm: FormGroup= this.formBuilder.group({
+  profileNameForm: FormGroup = this.formBuilder.group({
     'firstname': new FormControl('', [Validators.required, Validators.maxLength(50)]),
     'lastname': new FormControl('', [Validators.required, Validators.maxLength(50)]),
   });;
 
-  profilePasswordForm: FormGroup= this.formBuilder.group({
+  profileEmailForm: FormGroup = this.formBuilder.group({
+    'email': new FormControl('', [Validators.required, Validators.email, Validators.maxLength(50)]),
+  });
+
+  profilePasswordForm: FormGroup = this.formBuilder.group({
     'password': new FormControl('', [Validators.required, Validators.maxLength(20)]),
     'verifypassword': new FormControl('', [Validators.required]),
   }, {
-    validator: MatchValidator('password', 'verifypassword')
-  });;
+      validator: MatchValidator('password', 'verifypassword')
+    });;
 
   user: User = new User();
 
-  constructor(private userService: UserService, 
+  constructor(private userService: UserService,
     private router: Router,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar) { }
@@ -39,6 +43,7 @@ export class ProfileComponent implements OnInit {
     this.user = this.userService.getUser();
     this.profileNameForm.controls['firstname'].setValue(this.user.firstName);
     this.profileNameForm.controls['lastname'].setValue(this.user.lastName);
+    this.profileEmailForm.controls['email'].setValue(this.user.email);
   }
 
   updateName() {
@@ -55,7 +60,24 @@ export class ProfileComponent implements OnInit {
       this.openSnackBar("profile updated", "OK", "green-snackbar");
       sessionStorage.setItem("user", JSON.stringify(result));
     },
-    error => this.handleError(error)
+      error => this.handleError(error)
+    );
+  }
+
+  updateEmail() {
+    if (this.profileEmailForm.invalid) {
+      return;
+    }
+    let updatedUser: ProfileUpdate = new ProfileUpdate();
+    updatedUser.email = this.profileEmailForm.get("email").value;
+
+    this.userService.updateUser(updatedUser).subscribe(result => {
+      this.user = result;
+      this.profileEmailForm.controls['email'].setValue(result.email);
+      this.openSnackBar("email updated", "OK", "green-snackbar");
+      sessionStorage.setItem("user", JSON.stringify(result));
+    },
+      error => this.handleError(error)
     );
   }
 

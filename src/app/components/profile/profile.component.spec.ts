@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatCardModule, MatFormFieldModule, MatSnackBarModule, MatInputModule } from "@angular/material";
+import { MatCardModule, MatFormFieldModule, MatSnackBarModule, MatInputModule, MatTooltipModule } from "@angular/material";
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterTestingModule } from "@angular/router/testing";
@@ -23,7 +23,8 @@ describe('ProfileComponent', () => {
         RouterTestingModule,
         MatSnackBarModule,
         MatInputModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        MatTooltipModule
       ],
       declarations: [ ProfileComponent ],
       providers: [ProfileComponent, {
@@ -150,5 +151,40 @@ describe('ProfileComponent', () => {
     verifypassword.setValue('1234');
     fixture.detectChanges();
     expect(component.profilePasswordForm.valid).toBeTruthy();
+  });
+
+  it('email should be invalid when blank', ()  => {
+    let email = component.profileEmailForm.controls['email'];
+    email.setValue('')
+    fixture.detectChanges();
+    expect(email.valid).toBeFalsy();
+  });
+
+  it('email should be invalid when fifty one plus characters', ()  => {
+    let email = component.profileEmailForm.controls['email'];
+    email.setValue('XXXXXXXXXXXXXXXXXXXXXXXXXXX@XXXXXXXXXXXXXXXXXXXXXXX')
+    fixture.detectChanges();
+    expect(email.valid).toBeFalsy();
+  });
+
+  it('email should be valid when fifty characters or less', ()  => {
+    let email = component.profileEmailForm.controls['email'];
+    email.setValue('XXXXXXXXXXXXXXXXXXXXXXXXXX@XXXXXXXXXXXXXXXXXXXXXXX')
+    fixture.detectChanges();
+    expect(email.valid).toBeTruthy();
+  });
+
+  it('email should be invalid when format is incorrect', ()  => {
+    let email = component.profileEmailForm.controls['email'];
+    email.setValue('testemail')
+    fixture.detectChanges();
+    expect(email.valid).toBeFalsy();
+  });
+
+  it('email should be valid when format is correct', ()  => {
+    let email = component.profileEmailForm.controls['email'];
+    email.setValue('testemail@test')
+    fixture.detectChanges();
+    expect(email.valid).toBeTruthy();
   });
 });

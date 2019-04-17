@@ -103,6 +103,41 @@ describe('RegisterComponent', () => {
     expect(lastname.valid).toBeTruthy();
   });
 
+  it('email should be invalid when blank', ()  => {
+    let email = component.registrationForm.controls['email'];
+    email.setValue('')
+    fixture.detectChanges();
+    expect(email.valid).toBeFalsy();
+  });
+
+  it('email should be invalid when fifty one plus characters', ()  => {
+    let email = component.registrationForm.controls['email'];
+    email.setValue('XXXXXXXXXXXXXXXXXXXXXXXXXXX@XXXXXXXXXXXXXXXXXXXXXXX')
+    fixture.detectChanges();
+    expect(email.valid).toBeFalsy();
+  });
+
+  it('email should be valid when fifty characters or less', ()  => {
+    let email = component.registrationForm.controls['email'];
+    email.setValue('XXXXXXXXXXXXXXXXXXXXXXXXXX@XXXXXXXXXXXXXXXXXXXXXXX')
+    fixture.detectChanges();
+    expect(email.valid).toBeTruthy();
+  });
+
+  it('email should be invalid when format is incorrect', ()  => {
+    let email = component.registrationForm.controls['email'];
+    email.setValue('testemail')
+    fixture.detectChanges();
+    expect(email.valid).toBeFalsy();
+  });
+
+  it('email should be valid when format is correct', ()  => {
+    let email = component.registrationForm.controls['email'];
+    email.setValue('testemail@test')
+    fixture.detectChanges();
+    expect(email.valid).toBeTruthy();
+  });
+
   it('password should be invalid when blank', ()  => {
     let password = component.registrationForm.controls['password'];
     password.setValue('')
@@ -155,9 +190,11 @@ describe('RegisterComponent', () => {
     let firstname = component.registrationForm.controls['firstname'];
     let lastname = component.registrationForm.controls['lastname'];
     let username = component.registrationForm.controls['username'];
+    let email = component.registrationForm.controls['email'];
     username.setValue("cap")
     firstname.setValue("Steve");
     lastname.setValue("Rogers");
+    email.setValue("test@test");
     password.setValue('1234');
     verifypassword.setValue('1234');
     fixture.detectChanges();

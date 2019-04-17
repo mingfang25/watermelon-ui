@@ -14,7 +14,30 @@
     display:flex;
     justify-content: center;
     text-align: center;
-    margin-top: 180px;
+    margin-top: 120px;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        border-bottom:  1px solid #999;
+        padding-bottom: 1rem;
+
+        &--user-icon {
+            width: 6rem;
+            height: 6rem;;
+            border-radius: 100%;
+            margin-right: 2rem;
+        }
+
+        &--user-icon:hover {
+            opacity: .20;
+
+        }
+    }
+
+    &__form--one {
+        margin-top: 2rem;
+    }
 
     &__profile-input {
         width: 80%;

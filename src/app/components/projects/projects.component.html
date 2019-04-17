@@ -1,0 +1,17 @@
+<div class="side-tab">
+  <a class="side-tab__tab" (click)="openNav()" id="project">Projects</a>
+</div>
+
+<div id="side-bar" class="side-bar">
+  <div class="side-bar__container">
+    <a href="javascript:void(0)" class="side-bar__close" (click)="closeNav()">&times;</a>
+    <a class="side-bar__link" href="javascript:void(0)" *ngFor="let project of projects"
+      (click)="setProject(project)" [ngClass]="{'active': isActiveProject(project)}">{{project.projectName}}</a>
+    <div class="side-bar__footer">
+      <mat-form-field class="mat-form-field-dark">
+        <input matInput placeholder="add project" [(ngModel)]="newProject">
+      </mat-form-field>
+      <i class="side-bar__new glyphicon glyphicon-plus" title="Add Project" (click)="addProject()"></i>
+    </div>
+  </div>
+</div>

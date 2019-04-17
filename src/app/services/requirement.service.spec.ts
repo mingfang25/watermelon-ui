@@ -3,6 +3,8 @@ import { HttpClientTestingModule, HttpTestingController } from "@angular/common/
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { RequirementService } from './requirement.service';
 import { Requirement } from '../classes/requirement';
+import { ProjectService } from './project.service';
+import { MockProjectService } from '../testing/mockProjectService';
 
 const testUrl = '/requirements';
 
@@ -24,7 +26,8 @@ describe('RequirementService', () => {
       dueDate : "2019-03-05T03:20:24.015",
       comments : [],
       assignedToUser : 'User 2',
-      archived : true
+      archived : true,
+      projectId : 1
     },
     {
       id: 2,
@@ -38,7 +41,8 @@ describe('RequirementService', () => {
       dueDate : "2019-03-05T03:20:24.015",
       comments : [],
       assignedToUser : 'User 2',
-      archived : true
+      archived : true,
+      projectId : 1
     },
 ];
 
@@ -46,7 +50,8 @@ describe('RequirementService', () => {
     TestBed.configureTestingModule({
       imports: [ HttpClientTestingModule ],
       providers: [
-        RequirementService
+        RequirementService,
+        { provide: ProjectService, useClass : MockProjectService},
       ]
     });
 
@@ -74,7 +79,7 @@ describe('RequirementService', () => {
       }
     );
 
-    const req = httpTestingController.expectOne(requirementService.requirementsUrl);
+    const req = httpTestingController.expectOne(requirementService.requirementsUrl + "?project=1");
     expect(req.request.method).toBe('GET');
 
     req.flush(testRequirement);
@@ -108,7 +113,8 @@ describe('RequirementService', () => {
       dueDate : "2019-03-05T03:20:24.015",
       comments : [],
       assignedToUser : 'User 2',
-      archived : true
+      archived : true,
+      projectId : 1
     }
 
     requirementService.createRequirement(newRequirement).subscribe(

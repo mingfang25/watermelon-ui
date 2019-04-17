@@ -122,19 +122,19 @@ describe('IssueDialogComponent', () => {
     expect(priority.valid).toBeFalsy();
   });
 
-    it('estimate should be valid when not blank', ()  => {
-    let estimate = component.issueForm.controls['estimate'];
-    estimate.setValue('XXXX')
-    fixture.detectChanges();
-    expect(estimate.valid).toBeTruthy();
-  });
+  //   it('estimate should be valid when not blank', ()  => {
+  //   let estimate = component.issueForm.controls['estimate'];
+  //   estimate.setValue('XXXX')
+  //   fixture.detectChanges();
+  //   expect(estimate.valid).toBeTruthy();
+  // });
 
-  it('estimate should be invalid when blank', ()  => {
-    let estimate = component.issueForm.controls['estimate'];
-    estimate.setValue('')
-    fixture.detectChanges();
-    expect(estimate.valid).toBeFalsy();
-  });
+  // it('estimate should be invalid when blank', ()  => {
+  //   let estimate = component.issueForm.controls['estimate'];
+  //   estimate.setValue('')
+  //   fixture.detectChanges();
+  //   expect(estimate.valid).toBeFalsy();
+  // });
 
 
 

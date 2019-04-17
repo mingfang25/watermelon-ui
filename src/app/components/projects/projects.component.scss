@@ -1,0 +1,113 @@
+
+$primary-black: rgb(34, 34, 34);
+$primary-grey: #9d9d9d;
+$primary-white: #f1f1f1;
+
+.side-tab{
+
+    &__tab{
+        top: 8.5rem;
+        position: absolute; 
+        left: -80px;
+        transition: 0.3s;
+        padding: 15px;
+        width: 100px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        color: $primary-black;
+        border-radius: 0 10px 10px 0;
+        background-color: $primary-black;
+        text-transform: uppercase;
+        font-size: 1rem;
+        font-family: 'Lato', 'Arial', sans-serif;
+        letter-spacing: 3px;
+        font-weight: 300;
+        cursor: pointer;
+    }
+
+    &__tab:hover {
+        left: 0;
+        color: $primary-grey;
+    }
+}
+
+
+.side-bar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1; 
+    top: 0; 
+    left: 0;
+    background-color: $primary-black;
+    overflow-x: hidden; 
+    overflow: hidden;
+    white-space: nowrap;
+    padding-top: 60px;
+    transition: 0.5s; 
+
+    &__container {
+        margin-top: 2.5rem;
+    }
+
+    &__link {
+        padding: 6px 6px 6px 20px;
+        text-decoration: none;
+        font-size: 1.5rem;
+        color: $primary-grey;
+        display: block;
+        transition: 0.3s;
+
+        text-transform: uppercase;
+        font-family: 'Lato', 'Arial', sans-serif;
+        letter-spacing: 2px;
+        font-weight: 300;
+    }
+
+    &__link:hover {
+        color: $primary-white;
+    }
+
+    &__close {
+        position: absolute;
+        top: 5rem;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        text-decoration: none;
+        color: $primary-grey;
+    }
+
+    &__close:hover {
+        color: $primary-white;
+    }
+
+
+    &__footer {
+        padding: 20px 6px 6px 20px;
+        display: flex;
+        align-items: center;
+    }
+
+
+    &__new {
+        margin-left: 20px;
+        color: $primary-grey;
+        font-size: 2rem;
+    }
+
+    &__new:hover{
+        color: green;
+        cursor: pointer;
+    }
+    
+}
+
+.active {
+    font-weight: 600;
+    // text-underline-position: under;
+    // text-decoration: underline;
+    // text-decoration-color: $primary-grey;
+}
+
+

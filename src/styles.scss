@@ -36,6 +36,10 @@ body
     z-index: -1;
 }
 
+
+/***********************************************************************************************
+**** CUSTOM THEMED SNACKBARS
+************************************************************************************************/
 .red-snackbar {
     background: #b71c1c;
     color: #FAFAFA;
@@ -60,4 +64,29 @@ body
     .mat-button-wrapper {
         color:#FAFAFA;
     }
+}
+
+
+/***********************************************************************************************
+**** CUSTOM FORM FIELD FOR DARK BACKGROUND
+************************************************************************************************/
+.mat-form-field-dark.mat-form-field-appearance-legacy .mat-form-field-underline,
+.mat-form-field-dark.mat-form-field-appearance-legacy .mat-form-field-ripple,
+.mat-form-field-dark.mat-form-field-appearance-legacy.mat-focused
+	.mat-form-field-underline,
+.mat-form-field-dark.mat-form-field-appearance-legacy.mat-focused
+	.mat-form-field-ripple {
+	background-color: #9d9d9d;
+}
+
+.mat-form-field-dark.mat-form-field-appearance-legacy .mat-form-field-label,
+.mat-form-field-dark.mat-form-field-appearance-legacy.mat-focused
+	.mat-form-field-label {
+	color: #9d9d9d;
+}
+
+
+.mat-form-field-dark.mat-form-field-appearance-legacy .mat-input-element {
+	caret-color: white;
+  color: white;
 }

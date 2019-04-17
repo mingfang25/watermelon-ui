@@ -31,7 +31,7 @@
                 <ng-container *ngFor="let eachMessage of selectedGroup.messages">
                     <div *ngIf="eachMessage.user && (eachMessage.user.userName !== user.userName); else outgoingMessage" class="incoming_msg">
                       <div class="incoming_msg_img">
-                        <img src="./assets/user-profile.png" alt="user image">
+                        <img src="{{eachMessage.user.avatarUrl}}" alt="user image" class="user-image">
                       </div>
                       <div class="received_msg">
                         <div class="received_withd_msg">
